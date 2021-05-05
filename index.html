@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--Styles-->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <style>
+        .work {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .work *,
+        .work *::before,
+        .work *::after {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-family: "PobaPro", Arial, sans-serif;
+            word-break: keep-all;
+        }
+
+        .work-slider {
+            width: 100%;
+            font-family: "PobaPro", Arial, sans-serif;
+            background: url("https://static.tildacdn.com/tild3261-3865-4063-a130-353336663363/slider-back.svg") no-repeat;
+            background-size: cover;
+            padding-bottom: 50px;
+            background-position: bottom;
+        }
+
+        .work-slider__wrap {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 100%;
+            height: 74px;
+            color: #fff;
+            font-family: "PobaPro", Arial, sans-serif;
+            overflow: hidden;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 80px;
+            z-index: 2;
+        }
+
+        .work-slider__wrap .slides-num {
+            width: 304px;
+            background-color: #fa204c;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .work-slider__wrap .arrow-prev,
+        .work-slider__wrap .arrow-next {
+            min-width: 338px;
+            max-width: 338px;
+            background-color: #fa204c;
+            border: none;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            color: #fff;
+            text-align: left;
+            position: relative;
+        }
+
+        .work-slider__wrap .arrow-prev span,
+        .work-slider__wrap .arrow-next span {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .work-slider__wrap .arrow-prev span span,
+        .work-slider__wrap .arrow-next span span {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .work-slider__wrap .arrow-prev span span+span,
+        .work-slider__wrap .arrow-next span span+span {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        .work-slider__wrap .arrow-prev img,
+        .work-slider__wrap .arrow-next img {
+            z-index: 2;
+            width: 34px;
+            height: 35px;
+        }
+
+        .work-slider__wrap .arrow-prev:hover::before,
+        .work-slider__wrap .arrow-prev:hover::after,
+        .work-slider__wrap .arrow-next:hover::before,
+        .work-slider__wrap .arrow-next:hover::after {
+            background-color: #d91c42;
+        }
+
+        .work-slider__wrap .arrow-prev:active::before,
+        .work-slider__wrap .arrow-prev:active::after,
+        .work-slider__wrap .arrow-next:active::before,
+        .work-slider__wrap .arrow-next:active::after {
+            background-color: #b91c3f;
+        }
+
+        .work-slider__wrap .arrow-next {
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding-left: 40px;
+        }
+
+        .work-slider__wrap .arrow-next img {
+            margin-left: 40px;
+        }
+
+        .work-slider__wrap .arrow-next::after {
+            content: "";
+            background-color: #fa204c;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100vw;
+            display: block;
+            z-index: 1;
+            -webkit-transition: background-color 0.3s linear, opacity 0.3s linear;
+            -o-transition: background-color 0.3s linear, opacity 0.3s linear;
+            transition: background-color 0.3s linear, opacity 0.3s linear;
+        }
+
+        .work-slider__wrap .arrow-next img {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .work-slider__wrap .arrow-prev {
+            text-align: right;
+            padding-right: 40px;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .work-slider__wrap .arrow-prev img {
+            margin-right: 40px;
+        }
+
+        .work-slider__wrap .arrow-prev::before {
+            content: "";
+            background-color: #fa204c;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 100vw;
+            display: block;
+            z-index: 1;
+            -webkit-transition: background-color 0.3s linear, opacity 0.3s linear;
+            -o-transition: background-color 0.3s linear, opacity 0.3s linear;
+            transition: background-color 0.3s linear, opacity 0.3s linear;
+        }
+
+        .work-slider__item {
+            width: 100%;
+        }
+
+        .work-slider__item-body {
+            max-width: 980px;
+            margin: auto;
+            padding-top: 40px;
+        }
+
+        .work-slider__item-title {
+            font-size: 2.7rem;
+            font-weight: 600;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .work-slider__item-list {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            list-style-type: none;
+            margin-bottom: 40px !important;
+        }
+
+        .work-slider__item-list-item {
+            padding: 5px 15px 5px 15px;
+            border-left: 0.0625rem solid rgba(255, 255, 255, 0.2);
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            color: #fff;
+            line-height: 125%;
+            max-width: 450px;
+        }
+
+        .work-slider__item-list-item span {
+            font-weight: 600;
+        }
+
+        .work-slider__item-list-item:first-child {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        .work-slider__item-slider {
+            max-width: 980px;
+            height: 316px;
+            position: relative;
+        }
+
+        .work-slider__item-slider .slick-prev,
+        .work-slider__item-slider .slick-next {
+            position: absolute;
+            top: calc(50% - 30px);
+            z-index: 10 !important;
+            color: transparent;
+            width: 30px;
+            height: 60px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            -webkit-transition: -webkit-transform 0.3s linear;
+            transition: -webkit-transform 0.3s linear;
+            -o-transition: transform 0.3s linear;
+            transition: transform 0.3s linear;
+            transition: transform 0.3s linear, -webkit-transform 0.3s linear;
+        }
+
+        .work-slider__item-slider .slick-prev::before,
+        .work-slider__item-slider .slick-next::before {
+            content: "";
+            background: url("https://static.tildacdn.com/tild6166-3036-4861-a530-643631336338/arrow-left-white.png") no-repeat;
+            background-size: 100% 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .work-slider__item-slider .slick-prev {
+            left: 20px;
+        }
+
+        .work-slider__item-slider .slick-prev:active {
+            -webkit-transform: translateX(-20px);
+            -ms-transform: translateX(-20px);
+            transform: translateX(-20px);
+        }
+
+        .work-slider__item-slider .slick-next {
+            right: 20px;
+        }
+
+        .work-slider__item-slider .slick-next::before {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .work-slider__item-slider .slick-next:active {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+        .work-slider__item-slider-item {
+            margin: 10px;
+            height: 316px;
+            overflow: hidden;
+        }
+
+        .work-slider__item-slider-item img {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center;
+            object-position: center;
+        }
+
+        @media screen and (max-width: 1050px) {
+            .work-slider {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .work-slider__wrap {
+                padding-left: 20px;
+                padding-right: 20px;
+                position: sticky;
+                top: 0;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+
+            .work-slider__wrap .arrow-next,
+            .work-slider__wrap .arrow-prev {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .work-slider__wrap .arrow-next img,
+            .work-slider__wrap .arrow-prev img {
+                margin: 0;
+                padding: 0;
+            }
+
+            .work-slider__wrap .arrow-next span,
+            .work-slider__wrap .arrow-prev span {
+                display: none;
+            }
+
+            .work-slider__wrap .arrow-next {
+                -webkit-box-pack: end;
+                -ms-flex-pack: end;
+                justify-content: flex-end;
+            }
+
+            .work-slider__item-title {
+                font-size: 1.7rem;
+            }
+
+            .work-slider__item-list {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+
+            .work-slider__item-list-item:first-child {
+                border-left: 0.0625rem solid rgba(255, 255, 255, 0.2);
+                padding-left: 15px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .work-slider__wrap {
+                top: 50px;
+            }
+        }
+    </style>
+
+    <!--Slider HTML-->
+
+    <div class="work">
+        <div class="work-slider__wrap">
+            <button type="button" class="slick-arrow arrow-prev"><img
+                    src="https://static.tildacdn.com/tild3961-3639-4764-b634-666239316365/arrow.png" alt="Стрелка">
+                <span>
+                    <span>Предыдущий проект</span><span></span>
+                </span></button>
+            <div class="slides-num"></div>
+            <button type="button" class="slick-arrow arrow-next"><span>
+                    <span>Следующий проект</span> <span></span>
+                </span> <img src="https://static.tildacdn.com/tild3961-3639-4764-b634-666239316365/arrow.png"
+                    alt="Стрелка"> </button>
+        </div>
+        <div class="work-slider">
+            <div class="work-slider__item" data-slide-name="Елка на Красной площади">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Персонажи “Спокойной ночи, малыши!” на главную елку страны на Красной площади, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер:<span>высота 200 см</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>20 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы:<span>высокоплотный пенополистирол + стеклопластик</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3939-6436-4534-b333-366163653165/image.jpeg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6465-3436-4366-b332-343663316464/image42.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3736-6532-4237-b738-396334653539/image49.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Батискаф для РГО">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Батискаф для Русского Географического общества в парк Зарядье, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>800 см х 400 см</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>20 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>стеклопластик + пенополистирол</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3664-3337-4130-b131-626636356562/image52.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3363-6661-4739-a262-396437323363/photo.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6530-3366-4430-b933-616164633061/image20.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Оформление ТЦ “Хорошо!”">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Оформление ТЦ “Хорошо!” ко дню его рождения, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>1 месяц</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>пенополистирол, дерево + стеклопластик</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6662-3534-4335-a336-346233363863/image34.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3939-3137-4566-a561-653266306338/image33.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6334-3665-4738-b063-636336343839/noroot.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3337-3531-4434-b063-313935656639/image38.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Fiat для фестиваля Lays">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Автомобиль “Фиат” для фестиваля Lays в Парке Горького, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>реального автомобиля</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>10 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Бизнес</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>высокоплотный пенополистирол+ гипсовая штукатурка</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3030-6162-4561-b064-396534636235/image13.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6463-6338-4361-a430-353831323638/image14.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Скульптура “Похищение Европы”">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Скульптура “Похищение Европы” для бизнес-центра W-Plaza, Москва.
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>400 Х 500 см</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>30 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>пенопласт + стеклопластик</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3765-3433-4366-b961-613635313738/image30.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3465-6437-4733-b633-383961346264/image10.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Акция Milka">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Будильники с шоколадками для промо-акции Milka. Москва, Санкт-Петербург
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>2 будильника высотой по 300 см каждый</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок:<span>12 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>стеклопластик 0,6 мм</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3636-6137-4563-a135-623335326636/image43.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3530-3030-4562-b435-623539363336/image27.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3031-6466-4565-a364-363963393931/image25.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Новогодняя елка в ГУМ">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Персонажи из передачи «Спокойной ночи, малыши!» для Новогодней ёлки в ТЦ ГУМ
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>150 см</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>12 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Вау!</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>высокоплотный пенополистирол + искусственный мех</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3332-6133-4564-b036-393134656262/noroot.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3933-6434-4030-a665-613433343737/image8.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6133-3336-4166-a631-393062356164/noroot.png"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Подставки для блюд в ресторан">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Подставки для блюд в виде швейных машин для ресторана Ritz-Carlton Lamberti, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>в натуральную величину</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>30 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>стеклопластик</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3564-3961-4533-a633-343330626635/image9.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6662-6238-4239-a234-353338333939/image16.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6531-3536-4434-b365-393861323833/image22.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Фигуры с картин Босха (МТС)">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Композиция из объёмных фигур по картине Иеронима Босха для Фестиваля МТС
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>5 м²</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>7 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Бизнес</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>пенополистирол + штукатурка</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6235-3738-4834-b564-343665666234/1.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6436-6334-4738-a636-363432643061/2.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3431-3166-4262-a436-313166343065/3.png"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Барельеф «Бесконечность»">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Барельеф «Бесконечность» (частный заказ), Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>6 м²</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>Шпаклевка гипсовая высокопрочная Knauf Uniflot, акриловые краски, акриловый
+                                финишный лак</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>7 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Премиум</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3865-6334-4338-b134-343937303832/image28.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Утёнок на Чёрную пятницу">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Утёнок на Чёрную пятницу, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>300х200 см</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>5 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Бизнес</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>пенополистирол + штукатурка</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3038-3036-4035-b538-333230363637/1.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3937-6632-4861-a235-633663343139/2.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3832-6164-4438-a466-336364323463/__.png"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild3133-6664-4734-a662-393432313430/___.png"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="work-slider__item" data-slide-name="Конь для Longines">
+                <div class="work-slider__item-body">
+                    <h3 class="work-slider__item-title">
+                        Брендированный конь для марки часов Longines. ГУМ, Москва
+                    </h3>
+                    <ul class="work-slider__item-list">
+                        <li class="work-slider__item-list-item">
+                            Размер: <span>real size</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Срок изготовления:<span>10 дней</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Тип покрытия:<span>Бизнес</span>
+                        </li>
+                        <li class="work-slider__item-list-item">
+                            Материалы: <span>пенополистирол + штукатурка</span>
+                        </li>
+                    </ul>
+                    <div class="work-slider__item-slider">
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6233-6433-4035-b936-343966303263/image7.jpg"
+                                alt="Фото">
+                        </div>
+                        <div class="work-slider__item-slider-item">
+                            <img src="https://static.tildacdn.com/tild6235-3131-4762-b566-633039336233/image12.jpg"
+                                alt="Фото">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts for Slider-->
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        const SLIDES_TO_SHOW = 1,
+            $slickElement = $('.work-slider');
+
+        $slickElement.on('init reInit afterChange', function (e, slick, currentSlide, nextSlide) {
+            let currentSlick = $('.slick-current.slick-active', slick.$slideTrack)
+            let prevName = currentSlick.prev().data('slide-name')
+            let nextName = currentSlick.next().data('slide-name')
+            const
+                page = Math.ceil(((currentSlide || 0) + 1) / SLIDES_TO_SHOW),
+                numPages = Math.ceil(slick.slideCount / SLIDES_TO_SHOW)
+
+
+
+            $slickElement.parent().find('.work-slider__wrap .arrow-next span span + span').text(nextName === null ? "Батискаф для РГО" : nextName)
+            $slickElement.parent().find('.work-slider__wrap .arrow-prev span span + span').text(prevName === null ? "Конь для Longines" : prevName)
+
+            $('.work-slider__wrap .slides-num', slick.$slider.parent()).text(`${page} из ${numPages}`);
+        });
+        $('.work-slider').slick({
+            slidesToShow: SLIDES_TO_SHOW,
+            slidesToScroll: SLIDES_TO_SHOW,
+            arrows: false,
+            adaptiveHeight: true,
+            draggable: false,
+            swipe: false
+        });
+        $slickElement.parent().find('.work-slider__wrap .arrow-next').click(function () {
+            $slickElement.slick('slickNext');
+        });
+        $slickElement.parent().find('.work-slider__wrap .arrow-prev').click(function () {
+            $slickElement.slick('slickPrev');
+        });
+        // Small slider
+        $('.work-slider__item-slider').slick({
+            infinite: true,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 700,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>
